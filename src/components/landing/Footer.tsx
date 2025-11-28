@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -50,11 +51,14 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-400 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">N</span>
-              </div>
-              <span className="text-2xl font-bold">NeuraNova</span>
+            <div className="mb-4">
+              <Image
+                src="/neuranova_logo.png"
+                alt="NeuraNova"
+                width={200}
+                height={55}
+                className="h-12 w-auto"
+              />
             </div>
             <p className="text-gray-300 max-w-md mb-4">
               Your lovable AI companion for chat, planning, and storytelling.
