@@ -7,6 +7,7 @@ import { ZyloProvider } from "@/lib/zylo/provider";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { BMCWidget } from "@/components/buymeacoffee/BMCWidget";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -118,6 +119,7 @@ export default function RootLayout({
                 {children}
                 <Toaster />
                 <Sonner />
+                <BMCWidget />
               </TooltipProvider>
             </ThemeProvider>
           </ZyloProvider>
