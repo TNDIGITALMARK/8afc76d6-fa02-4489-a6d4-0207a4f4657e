@@ -37,7 +37,7 @@ export default function Header() {
           {/* CTA Button */}
           <div className="hidden md:block">
             <Link
-              href="#contact"
+              href="/signup"
               className="inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-pink-400 to-pink-500 text-white font-medium rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300"
             >
               Join Beta
@@ -97,7 +97,7 @@ export default function Header() {
               About
             </Link>
             <Link
-              href="#contact"
+              href="/signup"
               className="block mx-4 px-6 py-2.5 bg-gradient-to-r from-pink-400 to-pink-500 text-white font-medium rounded-full text-center hover:shadow-lg transition-all"
               onClick={() => setMobileMenuOpen(false)}
             >
