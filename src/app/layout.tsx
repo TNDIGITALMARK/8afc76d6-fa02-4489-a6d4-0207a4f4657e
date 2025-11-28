@@ -19,8 +19,33 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Elegant Flora Boutique",
-  description: "Beautiful AI-powered website creation platform",
+  title: "NeuraNova - Your Lovable AI Companion",
+  description: "Simple, fast, and emotionally rich AI to chat, plan, and create stories. Your AI companion, coach, and storyteller available 24/7.",
+  keywords: "AI companion, AI chat, storytelling AI, personal AI coach, daily planning, emotional support AI",
+  authors: [{ name: "NeuraNova Team" }],
+  openGraph: {
+    title: "NeuraNova - Your Lovable AI Companion",
+    description: "Simple, fast, and emotionally rich AI to chat, plan, and create stories.",
+    type: "website",
+    locale: "en_US",
+    siteName: "NeuraNova",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NeuraNova - Your Lovable AI Companion",
+    description: "Simple, fast, and emotionally rich AI to chat, plan, and create stories.",
+  },
+  manifest: "/manifest.json",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/icon-192.png",
+  },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+  },
+  themeColor: "#E994A5",
 };
 
 export default function RootLayout({
