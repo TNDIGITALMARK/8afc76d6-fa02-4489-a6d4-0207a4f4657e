@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createContactSubmission } from '@/lib/supabase/contact';
 import { z } from 'zod';
+import nodemailer from 'nodemailer';
 
 // Validation schema for contact form
 const contactSchema = z.object({
@@ -33,27 +33,97 @@ export async function POST(request: NextRequest) {
 
     const { name, email, country, message } = validation.data;
 
-    // Get client IP and user agent
-    const ip_address = request.headers.get('x-forwarded-for') ||
-                       request.headers.get('x-real-ip') ||
-                       'unknown';
-    const user_agent = request.headers.get('user-agent') || 'unknown';
-
-    // Create submission in database
-    const submission = await createContactSubmission({
-      name,
-      email,
-      country,
-      message,
-      ip_address,
-      user_agent,
+    // Configure email transport using Gmail
+    // NOTE: You'll need to set up app-specific password for Gmail
+    // Go to: https://myaccount.google.com/apppasswords
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.GMAIL_USER || 'neuranova@gmail.com',
+        pass: process.env.GMAIL_APP_PASSWORD, // App-specific password needed
+      },
     });
+
+    // Compose email
+    const emailContent = {
+      from: process.env.GMAIL_USER || 'neuranova@gmail.com',
+      to: 'neuranova@gmail.com',
+      replyTo: email, // Allow easy reply to the sender
+      subject: `New Contact Form Message from ${name}`,
+      text: `
+New contact form submission:
+
+Name: ${name}
+Email: ${email}
+${country ? `Country: ${country}` : ''}
+
+Message:
+${message}
+
+---
+This message was sent via the NeuraNova contact form.
+      `.trim(),
+      html: `
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #E994A5 0%, #A855F7 100%); color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+    .content { background: #f9f9f9; padding: 20px; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 8px 8px; }
+    .field { margin-bottom: 15px; }
+    .field-label { font-weight: bold; color: #555; }
+    .field-value { margin-top: 5px; }
+    .message-box { background: white; padding: 15px; border-left: 4px solid #E994A5; margin-top: 10px; }
+    .footer { text-align: center; margin-top: 20px; color: #888; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2 style="margin: 0;">New Contact Form Submission</h2>
+    </div>
+    <div class="content">
+      <div class="field">
+        <div class="field-label">Name:</div>
+        <div class="field-value">${name}</div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Email:</div>
+        <div class="field-value"><a href="mailto:${email}">${email}</a></div>
+      </div>
+
+      ${country ? `
+      <div class="field">
+        <div class="field-label">Country:</div>
+        <div class="field-value">${country}</div>
+      </div>
+      ` : ''}
+
+      <div class="field">
+        <div class="field-label">Message:</div>
+        <div class="message-box">${message.replace(/\n/g, '<br>')}</div>
+      </div>
+
+      <div class="footer">
+        This message was sent via the NeuraNova contact form.
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+      `.trim(),
+    };
+
+    // Send email
+    await transporter.sendMail(emailContent);
 
     return NextResponse.json(
       {
         success: true,
         message: 'Thank you for your message! We will get back to you soon.',
-        submissionId: submission.id,
       },
       { status: 201 }
     );
@@ -63,11 +133,13 @@ export async function POST(request: NextRequest) {
 
     // Handle specific error cases
     if (error instanceof Error) {
-      if (error.message.includes('does not exist')) {
+      // Check for authentication errors
+      if (error.message.includes('Invalid login') || error.message.includes('Username and Password not accepted')) {
+        console.error('Email authentication failed. Please set up Gmail app password in environment variables.');
         return NextResponse.json(
           {
             success: false,
-            error: 'Database table not set up yet. Please contact support.',
+            error: 'Email service configuration error. Please contact support.',
           },
           { status: 503 }
         );
@@ -76,7 +148,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Failed to submit contact form',
+          error: 'Failed to send message',
           details: error.message,
         },
         { status: 500 }
