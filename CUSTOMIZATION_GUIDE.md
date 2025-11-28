@@ -10,7 +10,8 @@ Your NeuraNova landing page is ready! This guide will show you **what's next** a
 - Professional landing page with hero, features, pricing, testimonials, about, and contact sections
 - NeuraNova branding integrated with your logo colors (gold/bronze on dark background)
 - Mobile-responsive design that works on all devices
-- Contact form ready for user submissions
+- **🆕 Real contact form backend** with Supabase database storage
+- **🆕 Admin dashboard** to view and manage contact submissions
 - SEO-optimized meta tags
 - PWA (Progressive Web App) support
 
@@ -18,7 +19,23 @@ Your NeuraNova landing page is ready! This guide will show you **what's next** a
 
 ## 🚀 What's Next? (Step-by-Step)
 
-### 1. **Preview Your Website**
+### 1. **Set Up Contact Form Backend** 🆕
+
+The contact form now stores submissions in a Supabase database!
+
+**Quick setup (takes 2 minutes):**
+
+1. Follow the instructions in **`CONTACT_FORM_BACKEND_SETUP.md`**
+2. Execute the SQL migration in your Supabase Dashboard
+3. Test the contact form - submissions will be saved to the database
+4. View submissions at: `http://localhost:4006/admin/contacts`
+
+**What you get:**
+- Real database storage for contact form submissions
+- Admin dashboard to view and manage submissions
+- Email, IP tracking, and status management (new, read, replied, archived)
+
+### 2. **Preview Your Website**
 
 Your website is currently running at: `http://localhost:4006`
 
@@ -26,15 +43,16 @@ Your website is currently running at: `http://localhost:4006`
 - The development server is already running
 - Open your browser and visit `http://localhost:4006`
 - You'll see your full NeuraNova landing page
+- Test the contact form and view submissions in `/admin/contacts`
 
-### 2. **Test on Mobile Devices**
+### 3. **Test on Mobile Devices**
 
 - Open the same URL on your phone/tablet while on the same network
 - Check that all sections look good on small screens
 - Test the mobile menu (hamburger icon)
 - Verify contact form works on mobile
 
-### 3. **Deploy to Production**
+### 4. **Deploy to Production**
 
 **Option A: Vercel (Recommended - Free & Easy)**
 ```bash
