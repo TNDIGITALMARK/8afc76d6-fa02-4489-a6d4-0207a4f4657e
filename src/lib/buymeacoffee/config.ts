@@ -26,7 +26,7 @@ export interface PaymentPlan {
 
 // Buy Me a Coffee configuration
 export const BMC_CONFIG: BuyMeACoffeeConfig = {
-  username: '', // TODO: Replace with your Buy Me a Coffee username
+  username: 'enoch1622',
   enabled: true,
   widgetColor: '#E994A5', // NeuraNova primary color
   widgetMessage: 'Support NeuraNova',

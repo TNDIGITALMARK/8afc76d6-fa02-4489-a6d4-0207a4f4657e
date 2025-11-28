@@ -32,32 +32,32 @@ Edit: `src/lib/buymeacoffee/config.ts`
 
 ```typescript
 export const BMC_CONFIG: BuyMeACoffeeConfig = {
-  username: 'YOUR_USERNAME_HERE', // ← REPLACE THIS
+  username: 'enoch1622', // ✅ CONFIGURED
   enabled: true,
   widgetColor: '#E994A5',
   widgetMessage: 'Support NeuraNova',
 };
 ```
 
-In the same file, update:
+In the same file, update membership IDs when you create them on BMC:
 
 ```typescript
 {
   id: 'pro',
   // ... other fields ...
-  bmcMembershipId: 'YOUR_PRO_MEMBERSHIP_ID', // ← REPLACE THIS
+  bmcMembershipId: 'pro-monthly', // ⚠️ UPDATE WITH YOUR REAL MEMBERSHIP ID
 },
 {
   id: 'ultimate',
   // ... other fields ...
-  bmcMembershipId: 'YOUR_ULTIMATE_MEMBERSHIP_ID', // ← REPLACE THIS
+  bmcMembershipId: 'ultimate-monthly', // ⚠️ UPDATE WITH YOUR REAL MEMBERSHIP ID
 }
 ```
 
-- [ ] BMC username updated
-- [ ] Pro membership ID updated
-- [ ] Ultimate membership ID updated
-- [ ] File saved
+- [x] BMC username updated (enoch1622)
+- [ ] Pro membership ID updated (needs real ID from BMC dashboard)
+- [ ] Ultimate membership ID updated (needs real ID from BMC dashboard)
+- [x] File saved
 
 ### 3. Test the Integration
 
