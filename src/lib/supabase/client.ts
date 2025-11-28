@@ -13,6 +13,10 @@ export const supabase = createClient(
   }
 );
 
+// Tenant and project IDs from JWT
+export const TENANT_ID = '9bPkl82B20MAKexBDkisYgw08XI3';
+export const PROJECT_ID = '8afc76d6-fa02-4489-a6d4-0207a4f4657e';
+
 // Your scoped token contains:
 // - Tenant: 9bPkl82B20MAKexBDkisYgw08XI3
 // - Project: 8afc76d6-fa02-4489-a6d4-0207a4f4657e

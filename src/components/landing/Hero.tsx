@@ -22,16 +22,16 @@ export default function Hero() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Link
-                href="/signup"
+                href="/chat"
                 className="inline-flex items-center justify-center px-8 py-3.5 bg-gradient-to-r from-pink-400 to-pink-500 text-white font-semibold rounded-full hover:shadow-xl hover:scale-105 transition-all duration-300"
               >
-                Try NeuraNova
+                Start Chatting
               </Link>
               <Link
-                href="#features"
+                href="/signup"
                 className="inline-flex items-center justify-center px-8 py-3.5 bg-white text-gray-700 font-semibold rounded-full border-2 border-gray-300 hover:border-pink-400 hover:text-pink-500 transition-all duration-300"
               >
-                Learn More
+                Sign Up Free
               </Link>
             </div>
 
